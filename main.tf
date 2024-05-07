@@ -1,10 +1,10 @@
 resource "aws_s3_bucket" "created" {
-  var.create_bucket ? 1 : 0
+  count  = var.create_bucket ? 1 : 0
   bucket = var.bucket_name
 }
 
 data "aws_s3_bucket" "selected" {
-  var.create_bucket ? 0 : 1
+  count  = var.create_bucket ? 0 : 1
   bucket = var.bucket_name
 }
 
@@ -13,21 +13,40 @@ locals {
 }
 
 resource "aws_s3_object" "default" {
-  count = var.deploy_source ? 1 : 0
-  bucket = aws_s3_bucket.default.id
-  key    = "${var.appname}-${var.version}.zip"
-  source = "${var.appname}-${var.version}.zip"
+  for_each = toset(var.versions)
+  count    = var.deploy_source ? 1 : 0
+  bucket   = local.bucket.id
+  key      = "${var.appname}-${each.value}.zip"
+  source   = "${var.source_directory}/${var.appname}-${each.value}.zip"
 }
 
-resource "aws_elastic_beanstalk_application" "default" {
+resource "aws_elastic_beanstalk_application" "app" {
   name        = var.appname
   description = var.description
+  tags        = var.app_tags
+  dynamic "appversion_lifecycle" {
+    for_each = var.service_role_arn != null ? ["*"] : []
+    content {
+      service_role          = var.service_role_arn
+      max_count             = var.max_count
+      max_age_in_days       = var.max_age_in_days
+      delete_source_from_s3 = var.delete_source_from_s3
+    }
+  }
 }
 
-resource "aws_elastic_beanstalk_application_version" "default" {
-  name        = "${var.appname}-${var.version}"
+locals {
+  app_version_tags = {
+    for version in var.versions : version => merge(var.app_tags, lookup(var.app_version_tags, version, {}))
+  }
+}
+
+resource "aws_elastic_beanstalk_application_version" "version" {
+  for_each    = toset(var.versions)
+  name        = "${var.appname}-${each.value}"
   application = var.appname
   description = var.appversion_description
   bucket      = local.bucket.id
-  key         = "${var.appname}-${var.version}.zip"
+  key         = "${var.appname}-${each.value}.zip"
+  tags        = lookup(local.app_version_tags, each.value)
 }
