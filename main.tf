@@ -21,6 +21,7 @@ resource "aws_s3_object" "default" {
 }
 
 resource "aws_elastic_beanstalk_application" "app" {
+  count       = var.deploy_app ? 1 : 0
   name        = var.appname
   description = var.description
   tags        = var.app_tags

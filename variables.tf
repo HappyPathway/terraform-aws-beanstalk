@@ -189,6 +189,11 @@ variable "availability_zone_selector" {
   description = "Availability Zone selector"
 }
 
+variable "deploy_app" {
+  type    = bool
+  default = false
+}
+
 variable "deployment_batch_size_type" {
   type        = string
   default     = "Fixed"
