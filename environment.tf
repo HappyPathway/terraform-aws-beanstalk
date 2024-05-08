@@ -161,7 +161,7 @@ locals {
     {
       namespace = "aws:elbv2:loadbalancer"
       name      = "AccessLogsS3Bucket"
-      value     = module.elb_logs.bucket_id
+      value     = var.elb_logs_bucket
   }] : []
 
   nlb_settings = [

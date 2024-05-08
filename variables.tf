@@ -230,6 +230,11 @@ variable "elb_scheme" {
   description = "Specify `internal` if you want to create an internal load balancer in your Amazon VPC so that your Elastic Beanstalk application cannot be accessed from outside your Amazon VPC"
 }
 
+variable "elb_logs_bucket" {
+  type    = string
+  default = null
+}
+
 variable "enable_capacity_rebalancing" {
   type        = bool
   default     = false
