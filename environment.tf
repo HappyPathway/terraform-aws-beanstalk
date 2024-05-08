@@ -6,6 +6,7 @@ module "elastic-beanstalk-environment" {
   version                            = "0.51.2"
   for_each                           = tomap(var.env_versions)
   application_subnets                = var.application_subnets
+  loadbalancer_subnets               = var.application_subnets
   elastic_beanstalk_application_name = var.appname
   region                             = data.aws_region.current.name
   solution_stack_name                = var.solution_stack_name
