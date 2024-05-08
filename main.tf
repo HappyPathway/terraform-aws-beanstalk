@@ -13,8 +13,7 @@ locals {
 }
 
 resource "aws_s3_object" "default" {
-  for_each = toset(var.versions)
-  count    = var.deploy_source ? 1 : 0
+  for_each = var.deploy_source ? toset(var.versions) : []
   bucket   = local.bucket.id
   key      = "${var.appname}-${each.value}.zip"
   source   = "${var.source_directory}/${var.appname}-${each.value}.zip"
