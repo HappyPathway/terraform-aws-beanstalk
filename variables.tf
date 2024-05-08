@@ -278,9 +278,9 @@ variable "deploy_app" {
 #   description = "Map of custom ENV variables to be provided to the application running on Elastic Beanstalk, e.g. env_vars = { DB_USER = 'admin' DB_PASS = 'xxxxxx' }"
 # }
 
-# variable "env_versions" {
-#   type = map(string)
-# }
+variable "env_versions" {
+  type = map(string)
+}
 
 # variable "environment_type" {
 #   type        = string
@@ -531,11 +531,11 @@ variable "deploy_app" {
 #   description = "SSH port"
 # }
 
-# variable "tier" {
-#   type        = string
-#   default     = "WebServer"
-#   description = "Elastic Beanstalk Environment tier, 'WebServer' or 'Worker'"
-# }
+variable "tier" {
+  type        = string
+  default     = "WebServer"
+  description = "Elastic Beanstalk Environment tier, 'WebServer' or 'Worker'"
+}
 
 # variable "update_level" {
 #   type        = string
