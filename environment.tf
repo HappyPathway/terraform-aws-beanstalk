@@ -15,4 +15,5 @@ module "elastic-beanstalk-environment" {
   tier                               = var.tier
   version_label                      = "${var.appname}-${each.value}"
   name                               = "${var.appname}-${each.key}"
+  environment_type                   = var.deployment_type
 }

@@ -39,6 +39,11 @@ variable "deploy_source" {
   default     = true
 }
 
+variable "deployment_type" {
+  default = "SingleInstance"
+  type    = string
+}
+
 variable "versions" {
   type        = list(string)
   description = "App Versions"
