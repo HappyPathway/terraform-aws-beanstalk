@@ -13,5 +13,5 @@ module "elastic-beanstalk-environment" {
   description                        = var.description
   tier                               = var.tier
   version_label                      = each.value
-  name                               = each.key
+  name                               = "${var.appname}-${each.key}"
 }
