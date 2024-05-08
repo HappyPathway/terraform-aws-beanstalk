@@ -12,6 +12,6 @@ module "elastic-beanstalk-environment" {
   vpc_id                             = var.vpc_id
   description                        = var.description
   tier                               = var.tier
-  version_label                      = each.value
+  version_label                      = "${var.appname}-${each.version}"
   name                               = "${var.appname}-${each.key}"
 }
