@@ -49,4 +49,9 @@ resource "aws_elastic_beanstalk_application_version" "version" {
   bucket      = local.bucket.id
   key         = "${var.appname}-${each.value}.zip"
   tags        = lookup(local.app_version_tags, each.value)
+  depends_on = [
+    aws_elastic_beanstalk_application.app
+
+  ]
+
 }
