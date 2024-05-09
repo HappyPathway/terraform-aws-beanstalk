@@ -17,6 +17,7 @@ module "elastic-beanstalk-environment" {
   version_label                      = "${var.appname}-${each.value}"
   name                               = "${var.appname}-${each.key}"
   environment_type                   = var.deployment_type
+  env_vars                           = var.env_vars
   depends_on = [
     aws_elastic_beanstalk_application.app,
     aws_elastic_beanstalk_application_version.version

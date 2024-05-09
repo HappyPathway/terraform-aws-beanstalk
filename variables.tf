@@ -277,11 +277,11 @@ variable "deploy_app" {
 #   description = "Whether to enable \"enhanced\" health reporting for this environment.  If false, \"basic\" reporting is used.  When you set this to false, you must also set `enable_managed_actions` to false"
 # }
 
-# variable "env_vars" {
-#   type        = map(string)
-#   default     = {}
-#   description = "Map of custom ENV variables to be provided to the application running on Elastic Beanstalk, e.g. env_vars = { DB_USER = 'admin' DB_PASS = 'xxxxxx' }"
-# }
+variable "env_vars" {
+  type        = map(string)
+  default     = {}
+  description = "Map of custom ENV variables to be provided to the application running on Elastic Beanstalk, e.g. env_vars = { DB_USER = 'admin' DB_PASS = 'xxxxxx' }"
+}
 
 variable "env_versions" {
   type = map(string)
