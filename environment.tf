@@ -13,6 +13,7 @@ module "elastic-beanstalk-environment" {
   vpc_id                             = var.vpc_id
   description                        = var.description
   tier                               = var.tier
+  rolling_update_enabled             = var.deployment_type == "SingleInstance" ? false : true
   version_label                      = "${var.appname}-${each.value}"
   name                               = "${var.appname}-${each.key}"
   environment_type                   = var.deployment_type
