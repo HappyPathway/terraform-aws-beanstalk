@@ -102,12 +102,11 @@ variable "solution_stack_name" {}
 # }
 
 
-# variable "ami_id" {
-#   type        = string
-#   default     = null
-#   description = "The id of the AMI to associate with the Amazon EC2 instances"
-# }
-
+variable "ami_owner" {
+  type        = string
+  default     = "self"
+  description = "AMI Owner"
+}
 
 # variable "application_port" {
 #   type        = number

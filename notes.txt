@@ -1,0 +1,3 @@
+https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/using-features.customenv.html
+https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/ami
+https://medium.com/@kriyanshishah06/installing-python-packages-in-air-gapped-environment-7c9bfddff2b0
