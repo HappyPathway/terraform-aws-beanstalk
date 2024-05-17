@@ -2,9 +2,12 @@ data "aws_region" "current" {}
 
 data "aws_ami" "ami_lookup" {
   for_each = toset(var.versions)
-  executable_users = ["self"]
-  most_recent      = true
-  owners           = [var.ami_owner]
+  most_recent = true
+  
+  filter {
+    name   = "state"
+    values = ["available"]
+  }
 
   filter {
     name   = "tag:app"
