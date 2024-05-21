@@ -25,7 +25,7 @@ module "elastic-beanstalk-environment" {
   source                             = "cloudposse/elastic-beanstalk-environment/aws"
   version                            = "0.51.2"
   for_each                           = tomap(var.env_versions)
-  ami_id                             = lookup(data.aws_ami.ami_lookup, each.value).id
+  ami_id                             = var.use_custom_image ? lookup(data.aws_ami.ami_lookup, each.value).id : null
   application_subnets                = var.application_subnets
   loadbalancer_subnets               = var.application_subnets
   elastic_beanstalk_application_name = var.appname

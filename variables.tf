@@ -569,3 +569,9 @@ variable "vpc_id" {
 #   default     = "20m"
 #   description = "The maximum duration to wait for the Elastic Beanstalk Environment to be in a ready state before timing out"
 # }
+
+variable use_custom_image {
+  default = false 
+  description = "Should we use a custom AMI?"
+  type = bool
+}
