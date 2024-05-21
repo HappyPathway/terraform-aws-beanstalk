@@ -1,7 +1,7 @@
 data "aws_region" "current" {}
 
 data "aws_ami" "ami_lookup" {
-  for_each = toset(var.versions)
+  for_each = var.use_custom_image ? toset(var.versions) : []
   most_recent = true
 
   filter {
