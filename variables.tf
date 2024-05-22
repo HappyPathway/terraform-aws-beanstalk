@@ -217,11 +217,11 @@ variable "deploy_app" {
 #   description = "Do not cancel a deployment due to failed health checks"
 # }
 
-# variable "deployment_policy" {
-#   type        = string
-#   default     = "Rolling"
-#   description = "Use the DeploymentPolicy option to set the deployment type. The following values are supported: `AllAtOnce`, `Rolling`, `RollingWithAdditionalBatch`, `Immutable`, `TrafficSplitting`"
-# }
+variable "deployment_policy" {
+  type        = string
+  default     = "Rolling"
+  description = "Use the DeploymentPolicy option to set the deployment type. The following values are supported: `AllAtOnce`, `Rolling`, `RollingWithAdditionalBatch`, `Immutable`, `TrafficSplitting`"
+}
 
 # variable "deployment_timeout" {
 #   type        = number

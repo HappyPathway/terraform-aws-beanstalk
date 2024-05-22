@@ -27,13 +27,15 @@ module "elastic-beanstalk-environment" {
   for_each                           = tomap(var.env_versions)
   ami_id                             = var.use_custom_image ? lookup(data.aws_ami.ami_lookup, each.value).id : null
   application_subnets                = var.application_subnets
-  loadbalancer_subnets               = var.application_subnets
+  loadbalancer_subnets               = var.loadbalancer_subnets
+  deployment_policy                  = var.deployment_policy
   elastic_beanstalk_application_name = var.appname
   region                             = data.aws_region.current.name
   solution_stack_name                = var.solution_stack_name
   vpc_id                             = var.vpc_id
   description                        = var.description
   tier                               = var.tier
+  root_volume_type                   = "gp3"
   rolling_update_enabled             = var.deployment_type == "SingleInstance" ? false : true
   version_label                      = "${var.appname}-${each.value}"
   name                               = "${var.appname}-${each.key}"
