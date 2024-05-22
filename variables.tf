@@ -575,3 +575,9 @@ variable use_custom_image {
   description = "Should we use a custom AMI?"
   type = bool
 }
+
+variable archive_source_directory {
+  default = false
+  description = "Should we archive the zip files for you?"
+  type = bool
+}

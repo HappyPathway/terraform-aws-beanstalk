@@ -12,11 +12,18 @@ locals {
   bucket = var.create_bucket ? one(aws_s3_bucket.created) : one(data.aws_s3_bucket.selected)
 }
 
+data "archive_file" "init" {
+  for_each    = var.archive_source_directory ? toset(var.versions) : []
+  type        = "zip"
+  source_dir  = "${var.source_directory}/${each.value}"
+  output_path = "${var.source_directory}/${each.value}/${var.appname}-${each.value}.zip"
+}
+
 resource "aws_s3_object" "default" {
   for_each = var.deploy_source ? toset(var.versions) : []
   bucket   = local.bucket.id
   key      = "${var.appname}-${each.value}.zip"
-  source   = "${var.source_directory}/${var.appname}-${each.value}.zip"
+  source   = "${var.source_directory}/${each.value}/${var.appname}-${each.value}.zip"
 }
 
 resource "aws_elastic_beanstalk_application" "app" {
