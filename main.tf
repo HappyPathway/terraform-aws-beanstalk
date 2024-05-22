@@ -57,8 +57,8 @@ resource "aws_elastic_beanstalk_application_version" "version" {
   key         = "${var.appname}-${each.value}.zip"
   tags        = lookup(local.app_version_tags, each.value)
   depends_on = [
-    aws_elastic_beanstalk_application.app
-
+    aws_elastic_beanstalk_application.app,
+    aws_s3_object.default
   ]
 
 }
