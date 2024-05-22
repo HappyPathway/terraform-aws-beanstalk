@@ -412,17 +412,17 @@ variable "env_versions" {
 #   description = "Specify a security policy to apply to the listener. This option is only applicable to environments with an application load balancer"
 # }
 
-# variable "loadbalancer_subnets" {
-#   type        = list(string)
-#   description = "List of subnets to place Elastic Load Balancer"
-#   default     = []
-# }
+variable "loadbalancer_subnets" {
+  type        = list(string)
+  description = "List of subnets to place Elastic Load Balancer"
+  default     = []
+}
 
-# variable "loadbalancer_type" {
-#   type        = string
-#   default     = "classic"
-#   description = "Load Balancer type, e.g. 'application' or 'classic'"
-# }
+variable "loadbalancer_type" {
+  type        = string
+  default     = "classic"
+  description = "Load Balancer type, e.g. 'application' or 'classic'"
+}
 
 # variable "logs_delete_on_terminate" {
 #   type        = bool
