@@ -27,6 +27,7 @@ module "elastic-beanstalk-environment" {
   for_each                           = tomap(var.env_versions)
   ami_id                             = var.use_custom_image ? lookup(data.aws_ami.ami_lookup, each.value).id : null
   application_subnets                = var.application_subnets
+  enable_loadbalancer_logs           = var.enable_loadbalancer_logs
   loadbalancer_subnets               = var.loadbalancer_subnets
   deployment_policy                  = var.deployment_policy
   elastic_beanstalk_application_name = var.appname

@@ -246,11 +246,11 @@ variable "deployment_policy" {
 #   description = "Specifies whether to enable the Capacity Rebalancing feature for Spot Instances in your Auto Scaling Group"
 # }
 
-# variable "enable_loadbalancer_logs" {
-#   type        = bool
-#   default     = true
-#   description = "Whether to enable Load Balancer Logging to the S3 bucket."
-# }
+variable "enable_loadbalancer_logs" {
+  type        = bool
+  default     = true
+  description = "Whether to enable Load Balancer Logging to the S3 bucket."
+}
 
 # variable "enable_log_publication_control" {
 #   type        = bool
