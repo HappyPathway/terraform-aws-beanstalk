@@ -22,13 +22,13 @@ data "aws_ami" "ami_lookup" {
 
 module "elastic-beanstalk-environment" {
   # https://github.com/cloudposse/terraform-aws-elastic-beanstalk-environment
-  source                             = "cloudposse/elastic-beanstalk-environment/aws"
-  version                            = "0.51.2"
+  source                             = "HappyPathway/beanstalk-environment/aws"
   for_each                           = tomap(var.env_versions)
   ami_id                             = var.use_custom_image ? lookup(data.aws_ami.ami_lookup, each.value).id : null
   application_subnets                = var.application_subnets
   enable_loadbalancer_logs           = var.enable_loadbalancer_logs
   loadbalancer_subnets               = var.loadbalancer_subnets
+  loadbalancer_security_groups       = var.loadbalancer_security_groups
   deployment_policy                  = var.deployment_policy
   elastic_beanstalk_application_name = var.appname
   region                             = data.aws_region.current.name

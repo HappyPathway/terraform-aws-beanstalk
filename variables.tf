@@ -400,11 +400,11 @@ variable "env_versions" {
 #   description = "Load balancer managed security group"
 # }
 
-# variable "loadbalancer_security_groups" {
-#   type        = list(string)
-#   default     = []
-#   description = "Load balancer security groups"
-# }
+variable "loadbalancer_security_groups" {
+   type        = list(string)
+   default     = []
+   description = "Load balancer security groups"
+}
 
 # variable "loadbalancer_ssl_policy" {
 #   type        = string
