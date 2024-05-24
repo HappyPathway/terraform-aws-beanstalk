@@ -67,5 +67,5 @@ resource aws_route53_record "environment" {
   name = "${var.appname}-${each.key}.${var.app_domain}"
   type = "CNAME"
   ttl = "300"
-  records = [module.elastic-beanstalk-environment[each.key].cname]
+  records = [module.elastic-beanstalk-environment[each.key].endpoint]
 }
