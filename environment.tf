@@ -61,7 +61,7 @@ output "environment_name" {
 }
 
 // create route 53 record for output of elastic-beanstalk-environment
-resource route53_record "environment" {
+resource aws_route53_record "environment" {
   for_each = tomap(var.env_versions)
   zone_id = var.zone_id
   name = "${var.appname}-${each.key}.${var.app_domain}"
