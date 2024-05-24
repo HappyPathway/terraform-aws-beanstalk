@@ -56,9 +56,6 @@ module "elastic-beanstalk-environment" {
   ]
 }
 
-output "environment_name" {
-  value = module.elastic-beanstalk-environment[each.key].name
-}
 
 // create route 53 record for output of elastic-beanstalk-environment
 resource aws_route53_record "environment" {
@@ -67,5 +64,5 @@ resource aws_route53_record "environment" {
   name = "${var.appname}-${each.key}.${var.app_domain}"
   type = "CNAME"
   ttl = "300"
-  records = [module.elastic-beanstalk-environment[each.key].endpoint]
+  records = [lookup(module.elastic-beanstalk-environment, each.key).endpoint]
 }
