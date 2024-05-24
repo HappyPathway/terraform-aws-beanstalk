@@ -286,11 +286,11 @@ variable "env_versions" {
   type = map(string)
 }
 
-# variable "environment_type" {
-#   type        = string
-#   default     = "LoadBalanced"
-#   description = "Environment type, e.g. 'LoadBalanced' or 'SingleInstance'.  If setting to 'SingleInstance', `rolling_update_type` must be set to 'Time', `updating_min_in_service` must be set to 0, and `loadbalancer_subnets` will be unused (it applies to the ELB, which does not exist in SingleInstance environments)"
-# }
+variable "environment_type" {
+  type        = string
+  default     = "LoadBalanced"
+  description = "Environment type, e.g. 'LoadBalanced' or 'SingleInstance'.  If setting to 'SingleInstance', `rolling_update_type` must be set to 'Time', `updating_min_in_service` must be set to 0, and `loadbalancer_subnets` will be unused (it applies to the ELB, which does not exist in SingleInstance environments)"
+}
 
 # variable "health_streaming_delete_on_terminate" {
 #   type        = bool
