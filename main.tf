@@ -60,5 +60,4 @@ resource "aws_elastic_beanstalk_application_version" "version" {
     aws_elastic_beanstalk_application.app,
     aws_s3_object.default
   ]
-
 }

@@ -40,7 +40,7 @@ variable "deploy_source" {
 }
 
 variable "deployment_type" {
-  default = "SingleInstance"
+  default = "LoadBalanced"
   type    = string
 }
 
@@ -284,6 +284,10 @@ variable "env_vars" {
 
 variable "env_versions" {
   type = map(string)
+}
+variable app_domain {
+  type = string
+  description = "App Domain"
 }
 
 variable "environment_type" {
@@ -580,4 +584,9 @@ variable archive_source_directory {
   default = false
   description = "Should we archive the zip files for you?"
   type = bool
+}
+
+variable zone_id {
+  type = string
+  description = "Route53 Zone ID"
 }

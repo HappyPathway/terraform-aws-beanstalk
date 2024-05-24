@@ -46,11 +46,26 @@ module "elastic-beanstalk-environment" {
     {
       "APP_NAME" = var.appname,
       "APP_ENV"  = each.key,
-      "APP_VERSION" = each.value
+      "APP_VERSION" = each.value,
+      "APP_DOMAIN" = var.app_domain
     }
   )
   depends_on = [
     aws_elastic_beanstalk_application.app,
     aws_elastic_beanstalk_application_version.version
   ]
+}
+
+output "environment_name" {
+  value = module.elastic-beanstalk-environment[each.key].name
+}
+
+// create route 53 record for output of elastic-beanstalk-environment
+resource route53_record "environment" {
+  for_each = tomap(var.env_versions)
+  zone_id = var.zone_id
+  name = "${var.appname}-${each.key}.${var.app_domain}"
+  type = "CNAME"
+  ttl = "300"
+  records = [module.elastic-beanstalk-environment[each.key].cname]
 }
