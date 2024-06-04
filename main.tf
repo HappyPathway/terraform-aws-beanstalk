@@ -23,7 +23,7 @@ resource "aws_s3_object" "default" {
   for_each = var.deploy_source ? toset(var.versions) : []
   bucket   = local.bucket.id
   key      = "${var.appname}-${each.value}.zip"
-  source   = var.archive_source_directory || var.package_name == "" ? "${var.source_directory}/${each.value}/${var.appname}-${each.value}.zip" : var.package_name
+  source   = var.archive_source_directory || var.package_name == "" ? "${var.source_directory}/${each.value}/${var.appname}-${each.value}.zip" : "${var.source_directory}/${each.value}/${var.package_name}"
 }
 
 resource "aws_elastic_beanstalk_application" "app" {
