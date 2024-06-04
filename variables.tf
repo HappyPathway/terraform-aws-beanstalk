@@ -285,8 +285,8 @@ variable "env_vars" {
 variable "env_versions" {
   type = map(string)
 }
-variable app_domain {
-  type = string
+variable "app_domain" {
+  type        = string
   description = "App Domain"
 }
 
@@ -405,9 +405,9 @@ variable "environment_type" {
 # }
 
 variable "loadbalancer_security_groups" {
-   type        = list(string)
-   default     = []
-   description = "Load balancer security groups"
+  type        = list(string)
+  default     = []
+  description = "Load balancer security groups"
 }
 
 # variable "loadbalancer_ssl_policy" {
@@ -574,19 +574,26 @@ variable "vpc_id" {
 #   description = "The maximum duration to wait for the Elastic Beanstalk Environment to be in a ready state before timing out"
 # }
 
-variable use_custom_image {
-  default = false 
+variable "use_custom_image" {
+  default     = false
   description = "Should we use a custom AMI?"
-  type = bool
+  type        = bool
 }
 
-variable archive_source_directory {
-  default = false
+variable "archive_source_directory" {
+  default     = false
   description = "Should we archive the zip files for you?"
-  type = bool
+  type        = bool
 }
 
-variable zone_id {
-  type = string
+variable "zone_id" {
+  type        = string
   description = "Route53 Zone ID"
+}
+
+
+variable "package_name" {
+  description = "The name of the package"
+  type        = string
+  default     = ""
 }

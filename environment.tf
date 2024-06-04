@@ -1,7 +1,7 @@
 data "aws_region" "current" {}
 
 data "aws_ami" "ami_lookup" {
-  for_each = var.use_custom_image ? toset(var.versions) : []
+  for_each    = var.use_custom_image ? toset(var.versions) : []
   most_recent = true
 
   filter {
@@ -41,13 +41,13 @@ module "elastic-beanstalk-environment" {
   version_label                      = "${var.appname}-${each.value}"
   name                               = "${var.appname}-${each.key}"
   environment_type                   = var.deployment_type
-  env_vars                           = merge(
+  env_vars = merge(
     var.env_vars,
     {
-      "APP_NAME" = var.appname,
-      "APP_ENV"  = each.key,
+      "APP_NAME"    = var.appname,
+      "APP_ENV"     = each.key,
       "APP_VERSION" = each.value,
-      "APP_DOMAIN" = var.app_domain
+      "APP_DOMAIN"  = var.app_domain
     }
   )
   depends_on = [
@@ -58,11 +58,11 @@ module "elastic-beanstalk-environment" {
 
 
 // create route 53 record for output of elastic-beanstalk-environment
-resource aws_route53_record "environment" {
+resource "aws_route53_record" "environment" {
   for_each = tomap(var.env_versions)
-  zone_id = var.zone_id
-  name = "${var.appname}-${each.key}.${var.app_domain}"
-  type = "CNAME"
-  ttl = "300"
-  records = [lookup(module.elastic-beanstalk-environment, each.key).endpoint]
+  zone_id  = var.zone_id
+  name     = "${var.appname}-${each.key}.${var.app_domain}"
+  type     = "CNAME"
+  ttl      = "300"
+  records  = [lookup(module.elastic-beanstalk-environment, each.key).endpoint]
 }
